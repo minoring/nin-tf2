@@ -32,6 +32,6 @@ def define_nin(input_shape):
   x = Conv2D(192, 3, activation='relu')(x)
   x = Conv2D(192, 1, activation='relu')(x)
   x = Conv2D(10, 1, activation='relu')(x)
-  output_tensor = GlobalAveragePooling2D(x)
+  output_tensor = GlobalAveragePooling2D()(x)
 
   return tf.keras.Model(input_tensor, output_tensor)

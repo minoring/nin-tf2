@@ -8,3 +8,4 @@ def define_flags():
   flags.DEFINE_string("dataset", "cifar-10",
                       "The name of dataset. [cifar-10, mnist]")
   flags.DEFINE_integer("batch_size", 128, "The size of batch. [128]")
+  flags.DEFINE_float('learning_rate', 0.001, "Learning rate. [0.001]")
