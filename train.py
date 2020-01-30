@@ -1,6 +1,7 @@
-"""Main for nin"""
-import tensorflow as tf
+"""Train Network in Network"""
+import datetime
 
+import tensorflow as tf
 from absl import app
 from absl import flags
 
@@ -35,11 +36,15 @@ def run(flags_obj):
       loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
       metrics=['accuracy'])
 
+  log_dir = './logs/fit' + datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
+  tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir,
+                                                        histogram_freq=1)
   nin.fit(train_dataset,
           epochs=flags_obj.epoch,
           steps_per_epoch=train_size // flags_obj.batch_size,
           validation_data=test_dataset,
-          validation_steps=test_size // flags_obj.batch_size)
+          validation_steps=test_size // flags_obj.batch_size,
+          callbacks=[tensorboard_callback])
 
 
 def main(_):
